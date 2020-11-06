@@ -3,6 +3,9 @@
 #include <array>
 #include <list>
 #include <algorithm>
+#include <iostream>
+#include <sstream>
+#include <iomanip>
 #include "../differential_evolution/Generation.h"
 
 std::list<Generation> species; 
@@ -69,6 +72,13 @@ namespace Graph {
 	private: System::Windows::Forms::CheckBox^ checkBox1;
 	private: System::Windows::Forms::CheckBox^ checkBox2;
 	private: System::Windows::Forms::Button^ button_Home;
+	private: System::Windows::Forms::TextBox^ textBox_range;
+	private: System::Windows::Forms::Label^ label_range;
+	private: System::Windows::Forms::GroupBox^ groupBox1;
+	private: System::Windows::Forms::GroupBox^ groupBox2;
+	private: System::Windows::Forms::GroupBox^ groupBox3;
+	private: System::Windows::Forms::TextBox^ textBox_fittest;
+	private: System::Windows::Forms::Label^ label4;
 
 	protected:
 	private: System::ComponentModel::IContainer^  components;
@@ -112,12 +122,22 @@ namespace Graph {
 			this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
 			this->checkBox2 = (gcnew System::Windows::Forms::CheckBox());
 			this->button_Home = (gcnew System::Windows::Forms::Button());
+			this->textBox_range = (gcnew System::Windows::Forms::TextBox());
+			this->label_range = (gcnew System::Windows::Forms::Label());
+			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
+			this->textBox_fittest = (gcnew System::Windows::Forms::TextBox());
+			this->label4 = (gcnew System::Windows::Forms::Label());
+			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
+			this->groupBox3 = (gcnew System::Windows::Forms::GroupBox());
+			this->groupBox1->SuspendLayout();
+			this->groupBox2->SuspendLayout();
+			this->groupBox3->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// label_x_min
 			// 
 			this->label_x_min->AutoSize = true;
-			this->label_x_min->Location = System::Drawing::Point(78, 521);
+			this->label_x_min->Location = System::Drawing::Point(137, 22);
 			this->label_x_min->Name = L"label_x_min";
 			this->label_x_min->Size = System::Drawing::Size(34, 13);
 			this->label_x_min->TabIndex = 3;
@@ -125,16 +145,16 @@ namespace Graph {
 			// 
 			// textBox_x_min
 			// 
-			this->textBox_x_min->Location = System::Drawing::Point(118, 518);
+			this->textBox_x_min->Location = System::Drawing::Point(177, 19);
 			this->textBox_x_min->Name = L"textBox_x_min";
-			this->textBox_x_min->Size = System::Drawing::Size(50, 20);
+			this->textBox_x_min->Size = System::Drawing::Size(25, 20);
 			this->textBox_x_min->TabIndex = 4;
 			this->textBox_x_min->Text = L"0";
 			// 
 			// label_x_max
 			// 
 			this->label_x_max->AutoSize = true;
-			this->label_x_max->Location = System::Drawing::Point(174, 521);
+			this->label_x_max->Location = System::Drawing::Point(208, 22);
 			this->label_x_max->Name = L"label_x_max";
 			this->label_x_max->Size = System::Drawing::Size(37, 13);
 			this->label_x_max->TabIndex = 5;
@@ -142,16 +162,16 @@ namespace Graph {
 			// 
 			// textBox_x_max
 			// 
-			this->textBox_x_max->Location = System::Drawing::Point(217, 518);
+			this->textBox_x_max->Location = System::Drawing::Point(251, 19);
 			this->textBox_x_max->Name = L"textBox_x_max";
-			this->textBox_x_max->Size = System::Drawing::Size(50, 20);
+			this->textBox_x_max->Size = System::Drawing::Size(25, 20);
 			this->textBox_x_max->TabIndex = 6;
 			this->textBox_x_max->Text = L"1";
 			// 
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(312, 521);
+			this->label3->Location = System::Drawing::Point(45, 22);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(80, 13);
 			this->label3->TabIndex = 7;
@@ -159,7 +179,7 @@ namespace Graph {
 			// 
 			// textBox_generation_size
 			// 
-			this->textBox_generation_size->Location = System::Drawing::Point(398, 518);
+			this->textBox_generation_size->Location = System::Drawing::Point(131, 19);
 			this->textBox_generation_size->Name = L"textBox_generation_size";
 			this->textBox_generation_size->Size = System::Drawing::Size(60, 20);
 			this->textBox_generation_size->TabIndex = 8;
@@ -167,16 +187,16 @@ namespace Graph {
 			// 
 			// textBox_y_max
 			// 
-			this->textBox_y_max->Location = System::Drawing::Point(217, 544);
+			this->textBox_y_max->Location = System::Drawing::Point(251, 45);
 			this->textBox_y_max->Name = L"textBox_y_max";
-			this->textBox_y_max->Size = System::Drawing::Size(50, 20);
+			this->textBox_y_max->Size = System::Drawing::Size(25, 20);
 			this->textBox_y_max->TabIndex = 13;
 			this->textBox_y_max->Text = L"1";
 			// 
 			// label_y_max
 			// 
 			this->label_y_max->AutoSize = true;
-			this->label_y_max->Location = System::Drawing::Point(174, 547);
+			this->label_y_max->Location = System::Drawing::Point(208, 48);
 			this->label_y_max->Name = L"label_y_max";
 			this->label_y_max->Size = System::Drawing::Size(37, 13);
 			this->label_y_max->TabIndex = 12;
@@ -184,16 +204,16 @@ namespace Graph {
 			// 
 			// textBox_y_min
 			// 
-			this->textBox_y_min->Location = System::Drawing::Point(118, 544);
+			this->textBox_y_min->Location = System::Drawing::Point(177, 45);
 			this->textBox_y_min->Name = L"textBox_y_min";
-			this->textBox_y_min->Size = System::Drawing::Size(50, 20);
+			this->textBox_y_min->Size = System::Drawing::Size(25, 20);
 			this->textBox_y_min->TabIndex = 11;
 			this->textBox_y_min->Text = L"0";
 			// 
 			// label_y_min
 			// 
 			this->label_y_min->AutoSize = true;
-			this->label_y_min->Location = System::Drawing::Point(78, 547);
+			this->label_y_min->Location = System::Drawing::Point(137, 48);
 			this->label_y_min->Name = L"label_y_min";
 			this->label_y_min->Size = System::Drawing::Size(34, 13);
 			this->label_y_min->TabIndex = 10;
@@ -217,7 +237,7 @@ namespace Graph {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(312, 547);
+			this->label1->Location = System::Drawing::Point(45, 48);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(80, 13);
 			this->label1->TabIndex = 14;
@@ -225,7 +245,7 @@ namespace Graph {
 			// 
 			// textBox_mutation_power
 			// 
-			this->textBox_mutation_power->Location = System::Drawing::Point(398, 544);
+			this->textBox_mutation_power->Location = System::Drawing::Point(131, 45);
 			this->textBox_mutation_power->Name = L"textBox_mutation_power";
 			this->textBox_mutation_power->Size = System::Drawing::Size(60, 20);
 			this->textBox_mutation_power->TabIndex = 15;
@@ -234,7 +254,7 @@ namespace Graph {
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(273, 573);
+			this->label2->Location = System::Drawing::Point(6, 74);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(119, 13);
 			this->label2->TabIndex = 16;
@@ -242,7 +262,7 @@ namespace Graph {
 			// 
 			// textBox_crossing_over_probability
 			// 
-			this->textBox_crossing_over_probability->Location = System::Drawing::Point(398, 570);
+			this->textBox_crossing_over_probability->Location = System::Drawing::Point(131, 71);
 			this->textBox_crossing_over_probability->Name = L"textBox_crossing_over_probability";
 			this->textBox_crossing_over_probability->Size = System::Drawing::Size(60, 20);
 			this->textBox_crossing_over_probability->TabIndex = 17;
@@ -316,7 +336,7 @@ namespace Graph {
 			// checkBox1
 			// 
 			this->checkBox1->AutoSize = true;
-			this->checkBox1->Location = System::Drawing::Point(511, 192);
+			this->checkBox1->Location = System::Drawing::Point(6, 21);
 			this->checkBox1->Name = L"checkBox1";
 			this->checkBox1->Size = System::Drawing::Size(125, 17);
 			this->checkBox1->TabIndex = 28;
@@ -327,7 +347,7 @@ namespace Graph {
 			// checkBox2
 			// 
 			this->checkBox2->AutoSize = true;
-			this->checkBox2->Location = System::Drawing::Point(511, 215);
+			this->checkBox2->Location = System::Drawing::Point(6, 47);
 			this->checkBox2->Name = L"checkBox2";
 			this->checkBox2->Size = System::Drawing::Size(92, 17);
 			this->checkBox2->TabIndex = 29;
@@ -345,14 +365,92 @@ namespace Graph {
 			this->button_Home->UseVisualStyleBackColor = true;
 			this->button_Home->Click += gcnew System::EventHandler(this, &MyForm::button_Home_Click);
 			// 
+			// textBox_range
+			// 
+			this->textBox_range->Location = System::Drawing::Point(51, 19);
+			this->textBox_range->Name = L"textBox_range";
+			this->textBox_range->Size = System::Drawing::Size(93, 20);
+			this->textBox_range->TabIndex = 31;
+			// 
+			// label_range
+			// 
+			this->label_range->AutoSize = true;
+			this->label_range->Location = System::Drawing::Point(6, 22);
+			this->label_range->Name = L"label_range";
+			this->label_range->Size = System::Drawing::Size(39, 13);
+			this->label_range->TabIndex = 32;
+			this->label_range->Text = L"Range";
+			// 
+			// groupBox1
+			// 
+			this->groupBox1->Controls->Add(this->textBox_fittest);
+			this->groupBox1->Controls->Add(this->label4);
+			this->groupBox1->Controls->Add(this->label_range);
+			this->groupBox1->Controls->Add(this->textBox_range);
+			this->groupBox1->Location = System::Drawing::Point(511, 274);
+			this->groupBox1->Name = L"groupBox1";
+			this->groupBox1->Size = System::Drawing::Size(150, 90);
+			this->groupBox1->TabIndex = 33;
+			this->groupBox1->TabStop = false;
+			// 
+			// textBox_fittest
+			// 
+			this->textBox_fittest->Location = System::Drawing::Point(51, 52);
+			this->textBox_fittest->Name = L"textBox_fittest";
+			this->textBox_fittest->Size = System::Drawing::Size(93, 20);
+			this->textBox_fittest->TabIndex = 34;
+			// 
+			// label4
+			// 
+			this->label4->AutoSize = true;
+			this->label4->Location = System::Drawing::Point(6, 55);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(35, 13);
+			this->label4->TabIndex = 33;
+			this->label4->Text = L"Fittest";
+			// 
+			// groupBox2
+			// 
+			this->groupBox2->Controls->Add(this->checkBox1);
+			this->groupBox2->Controls->Add(this->checkBox2);
+			this->groupBox2->Controls->Add(this->textBox_x_min);
+			this->groupBox2->Controls->Add(this->label_x_min);
+			this->groupBox2->Controls->Add(this->label_y_min);
+			this->groupBox2->Controls->Add(this->textBox_y_min);
+			this->groupBox2->Controls->Add(this->label_x_max);
+			this->groupBox2->Controls->Add(this->textBox_x_max);
+			this->groupBox2->Controls->Add(this->label_y_max);
+			this->groupBox2->Controls->Add(this->textBox_y_max);
+			this->groupBox2->Location = System::Drawing::Point(12, 518);
+			this->groupBox2->Name = L"groupBox2";
+			this->groupBox2->Size = System::Drawing::Size(280, 100);
+			this->groupBox2->TabIndex = 34;
+			this->groupBox2->TabStop = false;
+			this->groupBox2->Text = L"Objective function";
+			// 
+			// groupBox3
+			// 
+			this->groupBox3->Controls->Add(this->label2);
+			this->groupBox3->Controls->Add(this->label3);
+			this->groupBox3->Controls->Add(this->textBox_generation_size);
+			this->groupBox3->Controls->Add(this->label1);
+			this->groupBox3->Controls->Add(this->textBox_mutation_power);
+			this->groupBox3->Controls->Add(this->textBox_crossing_over_probability);
+			this->groupBox3->Location = System::Drawing::Point(298, 518);
+			this->groupBox3->Name = L"groupBox3";
+			this->groupBox3->Size = System::Drawing::Size(207, 100);
+			this->groupBox3->TabIndex = 35;
+			this->groupBox3->TabStop = false;
+			this->groupBox3->Text = L"Population";
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(734, 619);
+			this->ClientSize = System::Drawing::Size(722, 629);
+			this->Controls->Add(this->groupBox3);
+			this->Controls->Add(this->groupBox2);
 			this->Controls->Add(this->button_Home);
-			this->Controls->Add(this->checkBox2);
-			this->Controls->Add(this->checkBox1);
 			this->Controls->Add(this->button_create_new_generation);
 			this->Controls->Add(this->button_create);
 			this->Controls->Add(this->button_cycle);
@@ -360,23 +458,16 @@ namespace Graph {
 			this->Controls->Add(this->button_previous);
 			this->Controls->Add(this->textBox_generations_number);
 			this->Controls->Add(this->button_new_multiple_gen);
-			this->Controls->Add(this->textBox_crossing_over_probability);
-			this->Controls->Add(this->label2);
-			this->Controls->Add(this->textBox_mutation_power);
-			this->Controls->Add(this->label1);
-			this->Controls->Add(this->textBox_y_max);
-			this->Controls->Add(this->label_y_max);
-			this->Controls->Add(this->textBox_y_min);
-			this->Controls->Add(this->label_y_min);
-			this->Controls->Add(this->textBox_generation_size);
-			this->Controls->Add(this->label3);
-			this->Controls->Add(this->textBox_x_max);
-			this->Controls->Add(this->label_x_max);
-			this->Controls->Add(this->textBox_x_min);
-			this->Controls->Add(this->label_x_min);
 			this->Controls->Add(this->zedGraphControl1);
+			this->Controls->Add(this->groupBox1);
 			this->Name = L"MyForm";
 			this->Text = L"MyForm";
+			this->groupBox1->ResumeLayout(false);
+			this->groupBox1->PerformLayout();
+			this->groupBox2->ResumeLayout(false);
+			this->groupBox2->PerformLayout();
+			this->groupBox3->ResumeLayout(false);
+			this->groupBox3->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -404,17 +495,31 @@ namespace Graph {
 		bounds[1].second = Convert::ToDouble(textBox_y_max->Text);
 		Generation::setBoundaries(bounds);
 
-		// Записываем силу мутации и вероятность кроссинговера
-		double mp = Convert::ToDouble(textBox_mutation_power->Text);
-		double cop = Convert::ToDouble(textBox_crossing_over_probability->Text);
-		Individual::setMutationPower(mp);
-		Individual::setCrossingOverProbability(cop);
 			
 		// Создаём стартовое поколение
 		Generation origin(generation_size, genome_size);
-		//*gener = origin;
+
+		// Вывод range
+		std::ostringstream ost;
+		ost << std::scientific << origin.getRange();
+		System::String^ s = gcnew System::String(ost.str().c_str());
+		textBox_range->Text = s;
+
+		// Вывод fittest 
+		/*
+		Individual fit1(origin.getFittest(horrific_function));
+		textBox_fittest->Text = "(";
+		textBox_fittest->Text += Convert::ToString(fit1[0]);
+		textBox_fittest->Text += ", ";
+		textBox_fittest->Text += Convert::ToString(fit1[1]);
+		textBox_fittest->Text += ")";
+		*/
+		
+
+		// Записываем силу мутации и вероятность кроссинговера
+		origin.setMutationPower(Convert::ToDouble(textBox_mutation_power->Text));
+		origin.setCrossoverProbablity(Convert::ToDouble(textBox_crossing_over_probability->Text));
 		species.push_back(origin);
-		//species->at(generation_number) = origin;
 			
 		//
 		GraphPane^ panel = zedGraphControl1->GraphPane;
@@ -458,7 +563,14 @@ namespace Graph {
 	}
 	private: System::Void button_create_new_generation_Click(System::Object^ sender, System::EventArgs^ e) {
 		// Создаём новое поколение
-		Generation new_generation = species.back().createNewGeneation(objective_function);
+		Generation new_generation;
+		new_generation  = species.back().createNewGeneation(horrific_function);
+
+		// Вывод range
+		std::ostringstream ost;
+		ost << std::scientific << new_generation.getRange();
+		System::String^ s = gcnew System::String(ost.str().c_str());
+		textBox_range->Text = s;
 
 		// Записываем список точек для графика
 		PointPairList^ new_generation_point_list = gcnew ZedGraph::PointPairList();
@@ -492,10 +604,17 @@ namespace Graph {
 		int n = Convert::ToDouble(textBox_generations_number->Text);
 		Generation new_generation;
 		for (int i = 0; i < n; i++) {
-			new_generation = species.back().createNewGeneation(objective_function);
+			new_generation = species.back().createNewGeneation(horrific_function);
 			species.push_back(new_generation);
 			generation_number++;
 		}
+
+		// Вывод range
+		std::ostringstream ost;
+		ost << std::scientific << new_generation.getRange();
+		System::String^ s = gcnew System::String(ost.str().c_str());
+		textBox_range->Text = s;
+
 		// Записываем список точек для графика
 		PointPairList^ new_generation_point_list = gcnew ZedGraph::PointPairList();
 		for (int i = 0; i < generation_size; i++)

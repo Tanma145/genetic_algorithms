@@ -25,21 +25,25 @@ double icicle_function(std::vector<double> argument) {
 		throw - 1;
 
 }
-double wt_function(std::vector<double> argument) {
-	if (argument.size() == 2) {
-		std::mt19937 mersenne(static_cast<unsigned int>(time(0)));
 
+std::vector<std::vector<double>> A_matrix = { {-0.940, -0.536, -0.743}, {-0.502,  0.804,  0.769}, {-0.428, -0.789,  0.204} };
+std::vector<std::vector<double>> B_matrix = { { 0.590,  0.160, -0.681}, { 0.387,  0.945, -0.195}, {-0.231,  0.152,  0.295} };
+std::vector<std::vector<double>> C_matrix = { {-0.896, -0.613, -0.463}, { 0.038, -0.428, -0.714}, { 0.103,  0.741, -0.317} };
+std::vector<std::vector<double>> D_matrix = { {-0.754, -0.558, -0.989}, {-0.702,  0.881,  0.397}, {-0.056,  0.085, -0.616} };
+
+double horrific_function(std::vector<double> argument) {
+	if (argument.size() == 2) {
 		double x = argument[0];
 		double y = argument[1];
 		double result = 0;
 		double sum1 = 0, sum2 = 0;
 		double A, B, C, D;
-		for (int i = 1; i <= 7; i++) {
-			for (int j = 1; j <= 7; j++) {
-				A = i / (i * i + j * j) * 2 - 1;
-				B = j / (i * i + j * j) * 2 - 1;
-				C = i / (i * i + j * j) * 2 - 1;
-				D = j / (i * i + j * j) * 2 - 1;
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				A = A_matrix[i][j];
+				B = B_matrix[i][j];
+				C = C_matrix[i][j];
+				D = D_matrix[i][j];
 				sum1 += A * sin(i * PI * (x - 1 / 2)) * sin(j * PI * (y - 1 / 2)) + B * cos(i * PI * (x - 1 / 2)) * cos(j * PI * (y - 1 / 2));
 				sum2 += C * sin(i * PI * (x - 1 / 2)) * sin(j * PI * (y - 1 / 2)) + D * cos(i * PI * (x - 1 / 2)) * cos(j * PI * (y - 1 / 2));
 			}
@@ -49,15 +53,39 @@ double wt_function(std::vector<double> argument) {
 	else
 		throw - 1;
 }
+/*
+double food_integral(double x, double C_1, double sigma_1) {
+	return sigma_1 * (tanh(x + C_1) + 1);
+}
+double beta_integral(double x, double beta, double sigma_1) {
+	return beta * x * x;
+}
+double plancton_function(std::vector<double> argument) {
+	double C = 140;
+	double C_0 = 60;
+	double C_1 = 40;
+	double sigma_1 = 15;
+	double sigma_2 = 0.4;
+	double ksi = 5e-19;
+	double alpha = 0.0012;
+	double gamma = 1;
+	double betta = 7.5e-8;
+	double delta = 0.2;
+	double epsilon = 0.013;
+}
+*/
 
 class Individual
 {
 private:
 	std::vector<double> genome;
+	/*
 	static double mutation_power;
 	static double crossing_over_probability;
+	*/
 public:
 	Individual();
+	Individual(const Individual&);
 	Individual(std::vector<double>);
 	Individual(int);
 	~Individual() {}
@@ -65,21 +93,16 @@ public:
 	bool operator== (const Individual&) const;
 	bool operator!= (const Individual&) const;
 	double& operator[] (int i);
+	std::vector<double> toVector();
 	Individual& operator= (const Individual&);
 	Individual operator+ (const Individual&) const;
 	Individual operator- (const Individual&) const;
 	Individual operator* (const double&) const;
 
-	std::vector<double> toVectror();
 	int getSize() const;
-	static void setMutationPower(double);
-	static double getMutationPower();
-	static void setCrossingOverProbability(double);
-	static double getCrossingOverProbability();
 
-
-	Individual mutate(const Individual, const Individual) const;
-	Individual breed(const Individual, std::vector<std::pair<double, double>>) const;
+	Individual mutate(const Individual, const Individual, const double) const;
+	Individual breed(const Individual, const double, const std::vector<std::pair<double, double>>) const;
 
 	friend std::ostream& operator<<(std::ostream& out, Individual _individual) {
 		out << "(" << _individual[0];
@@ -93,6 +116,11 @@ public:
 Individual::Individual()
 {
 	genome = { 0 };
+}
+
+inline Individual::Individual(const Individual& ind)
+{
+	genome = ind.genome;
 }
 
 Individual::Individual(std::vector<double> _genome)
@@ -122,6 +150,11 @@ double& Individual::operator[](int i)
 		return genome[i];
 	else
 		throw - 1;
+}
+
+inline std::vector<double> Individual::toVector()
+{
+	return genome;
 }
 
 Individual& Individual::operator=(const Individual& ind)
@@ -165,44 +198,19 @@ Individual Individual::operator*(const double& scalar) const
 	return new_ind;
 }
 
-std::vector<double> Individual::toVectror()
-{
-	return genome;
-}
-
 int Individual::getSize() const
 {
 	return genome.size();
 }
 
-void Individual::setMutationPower(double mp)
-{
-	mutation_power = mp;
-}
-
-double Individual::getMutationPower()
-{
-	return mutation_power;
-}
-
-void Individual::setCrossingOverProbability(double cop)
-{
-	crossing_over_probability = cop;
-}
-
-double Individual::getCrossingOverProbability()
-{
-	return crossing_over_probability;
-}
-
-Individual Individual::mutate(const Individual ind_a, const Individual ind_b) const
+Individual Individual::mutate(const Individual ind_a, const Individual ind_b, const double mutation_power) const
 {
 	Individual new_ind(genome);
-	new_ind = new_ind + (ind_a - ind_b) * getMutationPower();
+	new_ind = new_ind + (ind_a - ind_b) * mutation_power;
 	return new_ind;
 }
 
-Individual Individual::breed(const Individual ind_mutated, std::vector<std::pair<double, double>> boundaries) const
+Individual Individual::breed(const Individual ind_mutated, const double crossing_over_probability, std::vector<std::pair<double, double>> boundaries) const
 {
 	std::mt19937 mersenne(static_cast<unsigned int>(time(0)));
 
@@ -219,6 +227,3 @@ Individual Individual::breed(const Individual ind_mutated, std::vector<std::pair
 	}
 	return new_ind;
 }
-
-double Individual::mutation_power = 0;
-double Individual::crossing_over_probability = 0;

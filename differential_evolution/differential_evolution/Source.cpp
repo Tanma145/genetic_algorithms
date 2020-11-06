@@ -7,40 +7,20 @@ using namespace std;
 
 int main() {
 	try {
-		std::list<Generation> species;
-		int genome_size, generation_size;
-		cout << "Enter the size of a genome: ";
-		cin >> genome_size;
-
-		vector<pair<double, double>> bounds(genome_size);
-		for (int i = 0; i < genome_size; i++) {
-			cout << "Enter min and max values for gene " << i << ": ";
-			cin >> bounds[i].first >> bounds[i].second;
+		std::mt19937 mersenne(static_cast<unsigned int>(time(0)));
+		vector<double> v(3);
+		for (int k = 0; k < 4; k++) {
+			for (int j = 0; j < 3; j++) {
+				for (int i = 0; i < v.size(); i++) {
+					v[i] = (mersenne() / MERSENNE_MAX) * 2 - 1;
+					cout.precision(3);
+					cout << v[i] << " ";
+				}
+				cout << endl;
+			}
+			cout << endl;
 		}
-		Generation::setBoundaries(bounds);
 
-		cout << "Enter the size of a generation: ";
-		cin >> generation_size;
-		Generation origin(generation_size, genome_size);
-		species.push_back(origin);
-		cout << origin << endl;
-
-		double mutation_power, crossing_over_probability;
-		cout << "Enter mutation power: ";
-		cin >> mutation_power;
-		Individual::setMutationPower(mutation_power);
-		cout << "Enter crossing-over probability: ";
-		cin >> crossing_over_probability;
-		Individual::setCrossingOverProbability(crossing_over_probability);
-
-		Generation new_generation = origin;
-		bool flag = true;
-		while (flag) {
-			new_generation = new_generation.createNewGeneation(rosenbrock_function);
-			species.push_back(new_generation);
-			cout << new_generation << endl << endl << "Continue? " << endl << endl;
-			cin >> flag;	
-		}
 	}
 	catch (int error) {
 		cout << "OOF";
