@@ -6,7 +6,7 @@
 #include <iostream>
 #include <sstream>
 #include <iomanip>
-#include "../differential_evolution/Generation.h"
+#include "../differential_evolution/DifferentialEvolution.h"
 
 std::list<Generation> species; 
 namespace Graph {
@@ -63,14 +63,16 @@ namespace Graph {
 	private: System::Windows::Forms::TextBox^ textBox_crossing_over_probability;
 	private: System::Windows::Forms::Button^ button_new_multiple_gen;
 	private: System::Windows::Forms::TextBox^ textBox_generations_number;
-	private: System::Windows::Forms::Button^ button_previous;
-	private: System::Windows::Forms::Button^ button_next;
-	private: System::Windows::Forms::Button^ button_cycle;
+
+
+
 	private: System::Windows::Forms::Button^ button_create;
 	private: System::Windows::Forms::Button^ button_create_new_generation;
+	private: System::Windows::Forms::CheckBox^ checkBox_rosenbrock_function;
+	private: System::Windows::Forms::CheckBox^ checkBox_icicle_function;
 
-	private: System::Windows::Forms::CheckBox^ checkBox1;
-	private: System::Windows::Forms::CheckBox^ checkBox2;
+
+
 	private: System::Windows::Forms::Button^ button_Home;
 	private: System::Windows::Forms::TextBox^ textBox_range;
 	private: System::Windows::Forms::Label^ label_range;
@@ -79,6 +81,12 @@ namespace Graph {
 	private: System::Windows::Forms::GroupBox^ groupBox3;
 	private: System::Windows::Forms::TextBox^ textBox_fittest;
 	private: System::Windows::Forms::Label^ label4;
+	private: System::Windows::Forms::CheckBox^ checkBox_horrific_function;
+	private: System::Windows::Forms::Button^ button_find_minimum;
+	private: System::Windows::Forms::TextBox^ textBox_epsilon;
+	private: System::Windows::Forms::Button^ button1;
+
+
 
 	protected:
 	private: System::ComponentModel::IContainer^  components;
@@ -114,13 +122,10 @@ namespace Graph {
 			this->textBox_crossing_over_probability = (gcnew System::Windows::Forms::TextBox());
 			this->button_new_multiple_gen = (gcnew System::Windows::Forms::Button());
 			this->textBox_generations_number = (gcnew System::Windows::Forms::TextBox());
-			this->button_previous = (gcnew System::Windows::Forms::Button());
-			this->button_next = (gcnew System::Windows::Forms::Button());
-			this->button_cycle = (gcnew System::Windows::Forms::Button());
 			this->button_create = (gcnew System::Windows::Forms::Button());
 			this->button_create_new_generation = (gcnew System::Windows::Forms::Button());
-			this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
-			this->checkBox2 = (gcnew System::Windows::Forms::CheckBox());
+			this->checkBox_rosenbrock_function = (gcnew System::Windows::Forms::CheckBox());
+			this->checkBox_icicle_function = (gcnew System::Windows::Forms::CheckBox());
 			this->button_Home = (gcnew System::Windows::Forms::Button());
 			this->textBox_range = (gcnew System::Windows::Forms::TextBox());
 			this->label_range = (gcnew System::Windows::Forms::Label());
@@ -128,7 +133,11 @@ namespace Graph {
 			this->textBox_fittest = (gcnew System::Windows::Forms::TextBox());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
+			this->checkBox_horrific_function = (gcnew System::Windows::Forms::CheckBox());
 			this->groupBox3 = (gcnew System::Windows::Forms::GroupBox());
+			this->button_find_minimum = (gcnew System::Windows::Forms::Button());
+			this->textBox_epsilon = (gcnew System::Windows::Forms::TextBox());
+			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->groupBox1->SuspendLayout();
 			this->groupBox2->SuspendLayout();
 			this->groupBox3->SuspendLayout();
@@ -286,33 +295,6 @@ namespace Graph {
 			this->textBox_generations_number->TabIndex = 19;
 			this->textBox_generations_number->Text = L"1";
 			// 
-			// button_previous
-			// 
-			this->button_previous->Location = System::Drawing::Point(511, 120);
-			this->button_previous->Name = L"button_previous";
-			this->button_previous->Size = System::Drawing::Size(70, 30);
-			this->button_previous->TabIndex = 20;
-			this->button_previous->Text = L"Previous";
-			this->button_previous->UseVisualStyleBackColor = true;
-			// 
-			// button_next
-			// 
-			this->button_next->Location = System::Drawing::Point(591, 120);
-			this->button_next->Name = L"button_next";
-			this->button_next->Size = System::Drawing::Size(70, 30);
-			this->button_next->TabIndex = 21;
-			this->button_next->Text = L"Next";
-			this->button_next->UseVisualStyleBackColor = true;
-			// 
-			// button_cycle
-			// 
-			this->button_cycle->Location = System::Drawing::Point(511, 156);
-			this->button_cycle->Name = L"button_cycle";
-			this->button_cycle->Size = System::Drawing::Size(150, 30);
-			this->button_cycle->TabIndex = 22;
-			this->button_cycle->Text = L"Cycle";
-			this->button_cycle->UseVisualStyleBackColor = true;
-			// 
 			// button_create
 			// 
 			this->button_create->Location = System::Drawing::Point(511, 12);
@@ -333,31 +315,31 @@ namespace Graph {
 			this->button_create_new_generation->UseVisualStyleBackColor = true;
 			this->button_create_new_generation->Click += gcnew System::EventHandler(this, &MyForm::button_create_new_generation_Click);
 			// 
-			// checkBox1
+			// checkBox_rosenbrock_function
 			// 
-			this->checkBox1->AutoSize = true;
-			this->checkBox1->Location = System::Drawing::Point(6, 21);
-			this->checkBox1->Name = L"checkBox1";
-			this->checkBox1->Size = System::Drawing::Size(125, 17);
-			this->checkBox1->TabIndex = 28;
-			this->checkBox1->Text = L"Rosenbrock function";
-			this->checkBox1->UseVisualStyleBackColor = true;
-			this->checkBox1->CheckedChanged += gcnew System::EventHandler(this, &MyForm::checkBox1_CheckedChanged);
+			this->checkBox_rosenbrock_function->AutoSize = true;
+			this->checkBox_rosenbrock_function->Location = System::Drawing::Point(6, 21);
+			this->checkBox_rosenbrock_function->Name = L"checkBox_rosenbrock_function";
+			this->checkBox_rosenbrock_function->Size = System::Drawing::Size(125, 17);
+			this->checkBox_rosenbrock_function->TabIndex = 28;
+			this->checkBox_rosenbrock_function->Text = L"Rosenbrock function";
+			this->checkBox_rosenbrock_function->UseVisualStyleBackColor = true;
+			this->checkBox_rosenbrock_function->CheckedChanged += gcnew System::EventHandler(this, &MyForm::checkBox_rosenbrock_function_CheckedChanged);
 			// 
-			// checkBox2
+			// checkBox_icicle_function
 			// 
-			this->checkBox2->AutoSize = true;
-			this->checkBox2->Location = System::Drawing::Point(6, 47);
-			this->checkBox2->Name = L"checkBox2";
-			this->checkBox2->Size = System::Drawing::Size(92, 17);
-			this->checkBox2->TabIndex = 29;
-			this->checkBox2->Text = L"Icicle function";
-			this->checkBox2->UseVisualStyleBackColor = true;
-			this->checkBox2->CheckedChanged += gcnew System::EventHandler(this, &MyForm::checkBox2_CheckedChanged);
+			this->checkBox_icicle_function->AutoSize = true;
+			this->checkBox_icicle_function->Location = System::Drawing::Point(6, 47);
+			this->checkBox_icicle_function->Name = L"checkBox_icicle_function";
+			this->checkBox_icicle_function->Size = System::Drawing::Size(92, 17);
+			this->checkBox_icicle_function->TabIndex = 29;
+			this->checkBox_icicle_function->Text = L"Icicle function";
+			this->checkBox_icicle_function->UseVisualStyleBackColor = true;
+			this->checkBox_icicle_function->CheckedChanged += gcnew System::EventHandler(this, &MyForm::checkBox_icicle_function_CheckedChanged);
 			// 
 			// button_Home
 			// 
-			this->button_Home->Location = System::Drawing::Point(511, 238);
+			this->button_Home->Location = System::Drawing::Point(511, 252);
 			this->button_Home->Name = L"button_Home";
 			this->button_Home->Size = System::Drawing::Size(150, 30);
 			this->button_Home->TabIndex = 30;
@@ -387,11 +369,12 @@ namespace Graph {
 			this->groupBox1->Controls->Add(this->label4);
 			this->groupBox1->Controls->Add(this->label_range);
 			this->groupBox1->Controls->Add(this->textBox_range);
-			this->groupBox1->Location = System::Drawing::Point(511, 274);
+			this->groupBox1->Location = System::Drawing::Point(511, 156);
 			this->groupBox1->Name = L"groupBox1";
 			this->groupBox1->Size = System::Drawing::Size(150, 90);
 			this->groupBox1->TabIndex = 33;
 			this->groupBox1->TabStop = false;
+			this->groupBox1->Text = L"Result";
 			// 
 			// textBox_fittest
 			// 
@@ -411,8 +394,9 @@ namespace Graph {
 			// 
 			// groupBox2
 			// 
-			this->groupBox2->Controls->Add(this->checkBox1);
-			this->groupBox2->Controls->Add(this->checkBox2);
+			this->groupBox2->Controls->Add(this->checkBox_horrific_function);
+			this->groupBox2->Controls->Add(this->checkBox_rosenbrock_function);
+			this->groupBox2->Controls->Add(this->checkBox_icicle_function);
 			this->groupBox2->Controls->Add(this->textBox_x_min);
 			this->groupBox2->Controls->Add(this->label_x_min);
 			this->groupBox2->Controls->Add(this->label_y_min);
@@ -427,6 +411,17 @@ namespace Graph {
 			this->groupBox2->TabIndex = 34;
 			this->groupBox2->TabStop = false;
 			this->groupBox2->Text = L"Objective function";
+			// 
+			// checkBox_horrific_function
+			// 
+			this->checkBox_horrific_function->AutoSize = true;
+			this->checkBox_horrific_function->Location = System::Drawing::Point(6, 73);
+			this->checkBox_horrific_function->Name = L"checkBox_horrific_function";
+			this->checkBox_horrific_function->Size = System::Drawing::Size(100, 17);
+			this->checkBox_horrific_function->TabIndex = 30;
+			this->checkBox_horrific_function->Text = L"Horrific function";
+			this->checkBox_horrific_function->UseVisualStyleBackColor = true;
+			this->checkBox_horrific_function->CheckedChanged += gcnew System::EventHandler(this, &MyForm::checkBox_horrific_function_CheckedChanged);
 			// 
 			// groupBox3
 			// 
@@ -443,19 +438,47 @@ namespace Graph {
 			this->groupBox3->TabStop = false;
 			this->groupBox3->Text = L"Population";
 			// 
+			// button_find_minimum
+			// 
+			this->button_find_minimum->Location = System::Drawing::Point(511, 120);
+			this->button_find_minimum->Name = L"button_find_minimum";
+			this->button_find_minimum->Size = System::Drawing::Size(150, 30);
+			this->button_find_minimum->TabIndex = 36;
+			this->button_find_minimum->Text = L"Find minimum";
+			this->button_find_minimum->UseVisualStyleBackColor = true;
+			this->button_find_minimum->Click += gcnew System::EventHandler(this, &MyForm::button_find_minimum_Click);
+			// 
+			// textBox_epsilon
+			// 
+			this->textBox_epsilon->Location = System::Drawing::Point(667, 126);
+			this->textBox_epsilon->Name = L"textBox_epsilon";
+			this->textBox_epsilon->Size = System::Drawing::Size(50, 20);
+			this->textBox_epsilon->TabIndex = 37;
+			this->textBox_epsilon->Text = L"0,01";
+			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(511, 288);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(150, 30);
+			this->button1->TabIndex = 38;
+			this->button1->Text = L"AAAAAAAAAAAAAAAA";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &MyForm::button1_Click);
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(722, 629);
+			this->Controls->Add(this->button1);
+			this->Controls->Add(this->textBox_epsilon);
+			this->Controls->Add(this->button_find_minimum);
 			this->Controls->Add(this->groupBox3);
 			this->Controls->Add(this->groupBox2);
 			this->Controls->Add(this->button_Home);
 			this->Controls->Add(this->button_create_new_generation);
 			this->Controls->Add(this->button_create);
-			this->Controls->Add(this->button_cycle);
-			this->Controls->Add(this->button_next);
-			this->Controls->Add(this->button_previous);
 			this->Controls->Add(this->textBox_generations_number);
 			this->Controls->Add(this->button_new_multiple_gen);
 			this->Controls->Add(this->zedGraphControl1);
@@ -483,6 +506,10 @@ namespace Graph {
 	}
 
 	private: System::Void button_create_Click(System::Object^ sender, System::EventArgs^ e) {
+		// Чистим график
+		GraphPane^ panel = zedGraphControl1->GraphPane;
+		panel->CurveList->Clear();
+
 		//initialization
 		generation_size = Convert::ToInt32(textBox_generation_size->Text);
 		std::vector<std::pair<double, double>> bounds(genome_size);
@@ -505,24 +532,25 @@ namespace Graph {
 		System::String^ s = gcnew System::String(ost.str().c_str());
 		textBox_range->Text = s;
 
-		// Вывод fittest 
-		/*
-		Individual fit1(origin.getFittest(horrific_function));
+		// Вывод fittest 		
+		Individual fit1;
+		std::ostringstream ost1;
+		std::ostringstream ost2;
+		fit1 = origin.getFittest(objective_function);
 		textBox_fittest->Text = "(";
-		textBox_fittest->Text += Convert::ToString(fit1[0]);
+		ost1 << std::fixed << std::setprecision(5) << fit1[0];
+		System::String^ s1 = gcnew System::String(ost1.str().c_str());
+		textBox_fittest->Text += s1;
 		textBox_fittest->Text += ", ";
-		textBox_fittest->Text += Convert::ToString(fit1[1]);
+		ost2 << std::fixed << std::setprecision(5) << fit1[1];
+		System::String^ s2 = gcnew System::String(ost2.str().c_str());
+		textBox_fittest->Text += s2;
 		textBox_fittest->Text += ")";
-		*/
 		
-
 		// Записываем силу мутации и вероятность кроссинговера
 		origin.setMutationPower(Convert::ToDouble(textBox_mutation_power->Text));
 		origin.setCrossoverProbablity(Convert::ToDouble(textBox_crossing_over_probability->Text));
 		species.push_back(origin);
-			
-		//
-		GraphPane^ panel = zedGraphControl1->GraphPane;
 
 		// Список точек
 		PointPairList^ origin_generation_point_list = gcnew ZedGraph::PointPairList();
@@ -564,13 +592,28 @@ namespace Graph {
 	private: System::Void button_create_new_generation_Click(System::Object^ sender, System::EventArgs^ e) {
 		// Создаём новое поколение
 		Generation new_generation;
-		new_generation  = species.back().createNewGeneation(horrific_function);
+		new_generation  = species.back().createNewGeneation(objective_function);
 
 		// Вывод range
 		std::ostringstream ost;
 		ost << std::scientific << new_generation.getRange();
 		System::String^ s = gcnew System::String(ost.str().c_str());
 		textBox_range->Text = s;
+
+		// Вывод fittest 		
+		Individual fit1;
+		std::ostringstream ost1;
+		std::ostringstream ost2;
+		fit1 = new_generation.getFittest(objective_function);
+		textBox_fittest->Text = "(";
+		ost1 << std::fixed << std::setprecision(5) << fit1[0];
+		System::String^ s1 = gcnew System::String(ost1.str().c_str());
+		textBox_fittest->Text += s1;
+		textBox_fittest->Text += ", ";
+		ost2 << std::fixed << std::setprecision(5) << fit1[1];
+		System::String^ s2 = gcnew System::String(ost2.str().c_str());
+		textBox_fittest->Text += s2;
+		textBox_fittest->Text += ")";
 
 		// Записываем список точек для графика
 		PointPairList^ new_generation_point_list = gcnew ZedGraph::PointPairList();
@@ -604,7 +647,7 @@ namespace Graph {
 		int n = Convert::ToDouble(textBox_generations_number->Text);
 		Generation new_generation;
 		for (int i = 0; i < n; i++) {
-			new_generation = species.back().createNewGeneation(horrific_function);
+			new_generation = species.back().createNewGeneation(objective_function);
 			species.push_back(new_generation);
 			generation_number++;
 		}
@@ -614,6 +657,21 @@ namespace Graph {
 		ost << std::scientific << new_generation.getRange();
 		System::String^ s = gcnew System::String(ost.str().c_str());
 		textBox_range->Text = s;
+
+		// Вывод fittest 		
+		Individual fit1;
+		std::ostringstream ost1;
+		std::ostringstream ost2;
+		fit1 = new_generation.getFittest(objective_function);
+		textBox_fittest->Text = "(";
+		ost1 << std::fixed << std::setprecision(16) << fit1[0];
+		System::String^ s1 = gcnew System::String(ost1.str().c_str());
+		textBox_fittest->Text += s1;
+		textBox_fittest->Text += ", ";
+		ost2 << std::fixed << std::setprecision(16) << fit1[1];
+		System::String^ s2 = gcnew System::String(ost2.str().c_str());
+		textBox_fittest->Text += s2;
+		textBox_fittest->Text += ")";
 
 		// Записываем список точек для графика
 		PointPairList^ new_generation_point_list = gcnew ZedGraph::PointPairList();
@@ -640,13 +698,21 @@ namespace Graph {
 		// Обновляем график
 		zedGraphControl1->Invalidate();
 	}
-	private: System::Void checkBox1_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
-		checkBox2->Checked = false;
+	private: System::Void checkBox_rosenbrock_function_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
+		checkBox_icicle_function->Checked = false;
+		checkBox_horrific_function->Checked = false;
 		objective_function = rosenbrock_function;
 	}
-	private: System::Void checkBox2_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
-		checkBox1->Checked = false;
+	private: System::Void checkBox_icicle_function_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
+		checkBox_rosenbrock_function->Checked = false;
+		checkBox_horrific_function->Checked = false;
 		objective_function = icicle_function;
+	}
+	private: System::Void checkBox_horrific_function_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
+		checkBox_rosenbrock_function->Checked = false;
+		checkBox_icicle_function->Checked = false;
+		objective_function = horrific_function;
+
 	}
 	private: System::Void button_Home_Click(System::Object^ sender, System::EventArgs^ e) {
 		std::vector<std::pair<double, double>> bounds(genome_size);
@@ -670,6 +736,58 @@ namespace Graph {
 		zedGraphControl1->AxisChange();
 		// Обновляем график
 		zedGraphControl1->Invalidate();
+	}
+	private: System::Void button_find_minimum_Click(System::Object^ sender, System::EventArgs^ e) {
+		// Записываем точки гранциы
+		std::vector<std::pair<double, double>> bounds(genome_size);
+		bounds[0].first = Convert::ToDouble(textBox_x_min->Text);
+		bounds[0].second = Convert::ToDouble(textBox_x_max->Text);
+		bounds[1].first = Convert::ToDouble(textBox_y_min->Text);
+		bounds[1].second = Convert::ToDouble(textBox_y_max->Text);
+		Generation::setBoundaries(bounds);
+		
+		double epsilon = Convert::ToDouble(textBox_epsilon->Text);
+		std::vector<double> fittest;
+		fittest = DifferentialEvolution::minimize(objective_function, bounds, epsilon);
+
+		// Вывод fittest 	
+		std::ostringstream ost1;
+		std::ostringstream ost2;
+		textBox_fittest->Text = "(";
+		ost1 << std::fixed << std::setprecision(16) << fittest[0];
+		System::String^ s1 = gcnew System::String(ost1.str().c_str());
+		textBox_fittest->Text += s1;
+		textBox_fittest->Text += ", ";
+		ost2 << std::fixed << std::setprecision(16) << fittest[1];
+		System::String^ s2 = gcnew System::String(ost2.str().c_str());
+		textBox_fittest->Text += s2;
+		textBox_fittest->Text += ")";
+	}
+	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+		// Записываем точки гранциы
+		std::vector<std::pair<double, double>> bounds(genome_size);
+		bounds[0].first = Convert::ToDouble(textBox_x_min->Text);
+		bounds[0].second = Convert::ToDouble(textBox_x_max->Text);
+		bounds[1].first = Convert::ToDouble(textBox_y_min->Text);
+		bounds[1].second = Convert::ToDouble(textBox_y_max->Text);
+		Generation::setBoundaries(bounds);
+
+		double n = Convert::ToInt32(textBox_generations_number->Text);
+		std::vector<double> fittest;
+		fittest = DifferentialEvolution::minimize_iter(objective_function, bounds, n);
+
+		// Вывод fittest 	
+		std::ostringstream ost1;
+		std::ostringstream ost2;
+		textBox_fittest->Text = "(";
+		ost1 << std::fixed << std::setprecision(16) << fittest[0];
+		System::String^ s1 = gcnew System::String(ost1.str().c_str());
+		textBox_fittest->Text += s1;
+		textBox_fittest->Text += ", ";
+		ost2 << std::fixed << std::setprecision(16) << fittest[1];
+		System::String^ s2 = gcnew System::String(ost2.str().c_str());
+		textBox_fittest->Text += s2;
+		textBox_fittest->Text += ")";
 	}
 };
 }

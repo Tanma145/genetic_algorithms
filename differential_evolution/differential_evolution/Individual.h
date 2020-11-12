@@ -25,12 +25,6 @@ double icicle_function(std::vector<double> argument) {
 		throw - 1;
 
 }
-
-std::vector<std::vector<double>> A_matrix = { {-0.940, -0.536, -0.743}, {-0.502,  0.804,  0.769}, {-0.428, -0.789,  0.204} };
-std::vector<std::vector<double>> B_matrix = { { 0.590,  0.160, -0.681}, { 0.387,  0.945, -0.195}, {-0.231,  0.152,  0.295} };
-std::vector<std::vector<double>> C_matrix = { {-0.896, -0.613, -0.463}, { 0.038, -0.428, -0.714}, { 0.103,  0.741, -0.317} };
-std::vector<std::vector<double>> D_matrix = { {-0.754, -0.558, -0.989}, {-0.702,  0.881,  0.397}, {-0.056,  0.085, -0.616} };
-
 double horrific_function(std::vector<double> argument) {
 	if (argument.size() == 2) {
 		double x = argument[0];
@@ -38,6 +32,12 @@ double horrific_function(std::vector<double> argument) {
 		double result = 0;
 		double sum1 = 0, sum2 = 0;
 		double A, B, C, D;
+
+		std::vector<std::vector<double>> A_matrix = { {-0.940, -0.536, -0.743}, {-0.502,  0.804,  0.769}, {-0.428, -0.789,  0.204} };
+		std::vector<std::vector<double>> B_matrix = { { 0.590,  0.160, -0.681}, { 0.387,  0.945, -0.195}, {-0.231,  0.152,  0.295} };
+		std::vector<std::vector<double>> C_matrix = { {-0.896, -0.613, -0.463}, { 0.038, -0.428, -0.714}, { 0.103,  0.741, -0.317} };
+		std::vector<std::vector<double>> D_matrix = { {-0.754, -0.558, -0.989}, {-0.702,  0.881,  0.397}, {-0.056,  0.085, -0.616} };
+
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
 				A = A_matrix[i][j];
@@ -79,10 +79,6 @@ class Individual
 {
 private:
 	std::vector<double> genome;
-	/*
-	static double mutation_power;
-	static double crossing_over_probability;
-	*/
 public:
 	Individual();
 	Individual(const Individual&);

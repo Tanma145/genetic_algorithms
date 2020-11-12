@@ -1,6 +1,6 @@
+#pragma once
 #include "Individual.h"
 #include <utility>
-#pragma once
 
 class Generation
 {
@@ -21,7 +21,7 @@ public:
 	void setCrossoverProbablity(double);
 	double getRange();
 	Individual& operator[] (int i);
-	Individual& getFittest(double fitness(std::vector<double>));
+	Individual getFittest(double fitness(std::vector<double>));
 	Generation& operator= (const Generation&);
 	
 	static void setBoundaries(std::vector<std::pair<double, double>>);
@@ -43,10 +43,11 @@ Generation::Generation()
 	crossover_probability = 0;
 }
 
-Generation::Generation(int generation_size, int genome_size, double mp = 0, double cop = 0)
+Generation::Generation(int generation_size, int genome_size, double mp = 0, double cp = 0)
 {
 	std::mt19937 mersenne(static_cast<unsigned int>(time(0)));
-
+	mutation_power = mp;
+	crossover_probability = cp;
 	range = 0;
 	std::vector<double> max(genome_size);
 	std::vector<double> min(genome_size);
@@ -108,7 +109,7 @@ Individual& Generation::operator[](int i)
 	return generation[i];
 }
 
-inline Individual& Generation::getFittest(double fitness(std::vector<double>))
+Individual Generation::getFittest(double fitness(std::vector<double>))
 {
 	Individual fit(generation[0]);
 	for (int i = 0; i < generation.size(); i++) {
