@@ -2,6 +2,7 @@
 #include <cmath>
 #include <list>
 #include <iomanip>
+#include <ctime>
 #include "DifferentialEvolution.h"
 
 using namespace std;
@@ -35,14 +36,19 @@ int main() {
 		}
 
 		double epsilon;
-		cout << "Enter epsilon" << endl;
-		cin >> epsilon;
+		int n;
+		cout << "Enter number of iterations" << endl;
+		cin >> n;
 
 		vector<double> fittest;
-		fittest = DifferentialEvolution::minimize_iter(objective_function, boundaries, 1000);
+		clock_t start = clock();
+		fittest = DifferentialEvolution::minimize_iter(objective_function, boundaries, n);
+		clock_t end = clock();
+		double seconds = (double)(end - start) / CLOCKS_PER_SEC;
+		cout << "-";
 
-		cout << setprecision(16);
-		cout << "Fittest: (" << fittest[0] << "; " << fittest[1] << ")";
+		cout << setprecision(16) << "Minimum: (" << fittest[0] << "; " << fittest[1] << ")" << endl;
+		cout << "Time: " << seconds;
 		_getch();
 	}
 	catch (int error) {

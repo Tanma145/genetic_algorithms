@@ -20,6 +20,7 @@ std::vector<double> DifferentialEvolution::minimize(double function(std::vector<
 	Generation::setBoundaries(boundaries);
 	Generation generation(population_size, boundaries.size(), mutation_power, crossover_probability);
 	while (generation.getRange() > epsilon) {
+		std::cout << " - " << generation.getRange() << std::endl;
 		Generation new_generation = generation.createNewGeneation(function);
 		generation = new_generation;
 	}
@@ -31,6 +32,7 @@ std::vector<double> DifferentialEvolution::minimize_iter(double function(std::ve
 	Generation generation(population_size, boundaries.size(), mutation_power, crossover_probability);
 	for (int i = 0; i < n; i++)
 	{
+		//std::cout << i << " - " << generation.getRange() << std::endl;
 		Generation new_generation = generation.createNewGeneation(function);
 		generation = new_generation;
 	}

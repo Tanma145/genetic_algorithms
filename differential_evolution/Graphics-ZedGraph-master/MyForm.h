@@ -281,7 +281,7 @@ namespace Graph {
 			// 
 			this->button_new_multiple_gen->Location = System::Drawing::Point(511, 84);
 			this->button_new_multiple_gen->Name = L"button_new_multiple_gen";
-			this->button_new_multiple_gen->Size = System::Drawing::Size(150, 30);
+			this->button_new_multiple_gen->Size = System::Drawing::Size(194, 30);
 			this->button_new_multiple_gen->TabIndex = 18;
 			this->button_new_multiple_gen->Text = L"Create multiple generations";
 			this->button_new_multiple_gen->UseVisualStyleBackColor = true;
@@ -289,7 +289,7 @@ namespace Graph {
 			// 
 			// textBox_generations_number
 			// 
-			this->textBox_generations_number->Location = System::Drawing::Point(667, 90);
+			this->textBox_generations_number->Location = System::Drawing::Point(711, 90);
 			this->textBox_generations_number->Name = L"textBox_generations_number";
 			this->textBox_generations_number->Size = System::Drawing::Size(50, 20);
 			this->textBox_generations_number->TabIndex = 19;
@@ -299,7 +299,7 @@ namespace Graph {
 			// 
 			this->button_create->Location = System::Drawing::Point(511, 12);
 			this->button_create->Name = L"button_create";
-			this->button_create->Size = System::Drawing::Size(150, 30);
+			this->button_create->Size = System::Drawing::Size(194, 30);
 			this->button_create->TabIndex = 23;
 			this->button_create->Text = L"Create";
 			this->button_create->UseVisualStyleBackColor = true;
@@ -309,7 +309,7 @@ namespace Graph {
 			// 
 			this->button_create_new_generation->Location = System::Drawing::Point(511, 48);
 			this->button_create_new_generation->Name = L"button_create_new_generation";
-			this->button_create_new_generation->Size = System::Drawing::Size(150, 30);
+			this->button_create_new_generation->Size = System::Drawing::Size(194, 30);
 			this->button_create_new_generation->TabIndex = 24;
 			this->button_create_new_generation->Text = L"Create next generation";
 			this->button_create_new_generation->UseVisualStyleBackColor = true;
@@ -339,9 +339,9 @@ namespace Graph {
 			// 
 			// button_Home
 			// 
-			this->button_Home->Location = System::Drawing::Point(511, 252);
+			this->button_Home->Location = System::Drawing::Point(511, 192);
 			this->button_Home->Name = L"button_Home";
-			this->button_Home->Size = System::Drawing::Size(150, 30);
+			this->button_Home->Size = System::Drawing::Size(194, 30);
 			this->button_Home->TabIndex = 30;
 			this->button_Home->Text = L"Home";
 			this->button_Home->UseVisualStyleBackColor = true;
@@ -349,9 +349,9 @@ namespace Graph {
 			// 
 			// textBox_range
 			// 
-			this->textBox_range->Location = System::Drawing::Point(51, 19);
+			this->textBox_range->Location = System::Drawing::Point(9, 38);
 			this->textBox_range->Name = L"textBox_range";
-			this->textBox_range->Size = System::Drawing::Size(93, 20);
+			this->textBox_range->Size = System::Drawing::Size(80, 20);
 			this->textBox_range->TabIndex = 31;
 			// 
 			// label_range
@@ -369,24 +369,24 @@ namespace Graph {
 			this->groupBox1->Controls->Add(this->label4);
 			this->groupBox1->Controls->Add(this->label_range);
 			this->groupBox1->Controls->Add(this->textBox_range);
-			this->groupBox1->Location = System::Drawing::Point(511, 156);
+			this->groupBox1->Location = System::Drawing::Point(511, 228);
 			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(150, 90);
+			this->groupBox1->Size = System::Drawing::Size(250, 104);
 			this->groupBox1->TabIndex = 33;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Result";
 			// 
 			// textBox_fittest
 			// 
-			this->textBox_fittest->Location = System::Drawing::Point(51, 52);
+			this->textBox_fittest->Location = System::Drawing::Point(9, 77);
 			this->textBox_fittest->Name = L"textBox_fittest";
-			this->textBox_fittest->Size = System::Drawing::Size(93, 20);
+			this->textBox_fittest->Size = System::Drawing::Size(235, 20);
 			this->textBox_fittest->TabIndex = 34;
 			// 
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(6, 55);
+			this->label4->Location = System::Drawing::Point(6, 61);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(35, 13);
 			this->label4->TabIndex = 33;
@@ -442,7 +442,7 @@ namespace Graph {
 			// 
 			this->button_find_minimum->Location = System::Drawing::Point(511, 120);
 			this->button_find_minimum->Name = L"button_find_minimum";
-			this->button_find_minimum->Size = System::Drawing::Size(150, 30);
+			this->button_find_minimum->Size = System::Drawing::Size(194, 30);
 			this->button_find_minimum->TabIndex = 36;
 			this->button_find_minimum->Text = L"Find minimum";
 			this->button_find_minimum->UseVisualStyleBackColor = true;
@@ -450,7 +450,7 @@ namespace Graph {
 			// 
 			// textBox_epsilon
 			// 
-			this->textBox_epsilon->Location = System::Drawing::Point(667, 126);
+			this->textBox_epsilon->Location = System::Drawing::Point(711, 126);
 			this->textBox_epsilon->Name = L"textBox_epsilon";
 			this->textBox_epsilon->Size = System::Drawing::Size(50, 20);
 			this->textBox_epsilon->TabIndex = 37;
@@ -458,9 +458,9 @@ namespace Graph {
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(511, 288);
+			this->button1->Location = System::Drawing::Point(511, 156);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(150, 30);
+			this->button1->Size = System::Drawing::Size(194, 30);
 			this->button1->TabIndex = 38;
 			this->button1->Text = L"AAAAAAAAAAAAAAAA";
 			this->button1->UseVisualStyleBackColor = true;
@@ -470,7 +470,7 @@ namespace Graph {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(722, 629);
+			this->ClientSize = System::Drawing::Size(767, 631);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->textBox_epsilon);
 			this->Controls->Add(this->button_find_minimum);
